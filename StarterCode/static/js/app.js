@@ -1,10 +1,10 @@
-function retrievePlot(id) {
+function retrievePlot(name) {
 
     // getting data from json file
     d3.json("samples.json").then((data) => {
         console.log(data)
 
-    var samples = data.samples.filter(d => d.id === id)[0];
+    var samples = data.samples.filter(d => d.id === name)[0];
         console.log(samples);
 
     var sample_values = samples.sample_values.slice(0,10).reverse();
@@ -73,11 +73,11 @@ function retrievePlot(id) {
 }
 
 
-function retrieveInfo(id) {
+function retrieveInfo(name) {
     d3.json("samples.json").then((data) => {
         var metadata = data.metadata;
         console.log(metadata)
-        var result = metadata.filter(d => d.id.toString() === id)[0];
+        var result = metadata.filter(d => d.id.toString() === name)[0];
         var info = d3.select('#sample-metadata');
         Object.entries(result).forEach((d) => {
             info.append("h6").text(d[0].toUpperCase() + ": " + d[1] + "\n");
@@ -86,9 +86,9 @@ function retrieveInfo(id) {
 }
 
 
-function optionChanged(id) {
-    retrievePlot(id);
-    retrieveInfo(id);
+function optionChanged(name) {
+    retrievePlot(name);
+    retrieveInfo(name);
 }
 
 function init() {
